@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EU Election Turnout</title>
+  </head>
+  <body>
+    <h1>EU Election Turnout</h1>
+
+    <form action="turnout" method="POST">
+      <div class="btn-wrap">
+        <button type="submit" value="1979" name="year">1979</button>
+        <button type="submit" value="1981" name="year">1981</button>
+        <button type="submit" value="1984" name="year">1984</button>
+        <button type="submit" value="1987" name="year">1987</button>
+        <button type="submit" value="1989" name="year">1989</button>
+        <button type="submit" value="1994" name="year">1994</button>
+        <button type="submit" value="1995" name="year">1995</button>
+        <button type="submit" value="1997" name="year">1997</button>
+        <button type="submit" value="1999" name="year">1999</button>
+        <button type="submit" value="2004" name="year">2004</button>
+        <button type="submit" value="2007" name="year">2007</button>
+        <button type="submit" value="2009" name="year">2009</button>
+        <button type="submit" value="2013" name="year">2013</button>
+        <button type="submit" value="2014" name="year">2014</button>
+        <button type="submit" value="2019" name="year">2019</button>
+        <button type="submit" value="2024" name="year">2024</button>
+      </div>
+    </form>
+
+    <% if (locals.election) { %>
+    <h2>EU Election <%= election.yearId %></h2>
+    <% if(election.turnoutByYear && election.turnoutByYear.turnoutEU &&
+    election.turnoutByYear.turnoutEU.percent){ %>
+    <p>Turnout EU-wide: <%= election.turnoutByYear.turnoutEU.percent %></p>
+    <% } %>
+
+    <hr />
+    <% election.turnoutByYear.turnoutByCountry.forEach((country) => { %>
+    <div class="country-wrap">
+      <ul>
+        <li><%= country.countryId %></li>
+        <% if(country.percent){ %>
+        <li><%= country.percent %></li>
+        <% } %>
+      </ul>
+    </div>
+    <% }) %> <% } %>
+  </body>
+</html>
